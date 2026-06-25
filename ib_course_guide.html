@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harrison IB Course Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f7f5f0;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --muted: #6b7280;
+    --rule: #e0dbd0;
+    --card: #ffffff;
+    --tag-bg: #f0f4ff;
+    --tag-text: #2563eb;
+    --hl-marker: #fef9c3;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── MASTHEAD ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255,255,255,0.04) 39px,
+      rgba(255,255,255,0.04) 40px
+    );
+    pointer-events: none;
+  }
+
+  .school-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: #93c5fd;
+  }
+
+  .header-sub {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    stroke: var(--muted);
+    pointer-events: none;
+  }
+
+  #search {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: background 0.2s;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  #search::placeholder { color: #94a3b8; }
+  #search:focus { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.28); }
+
+  /* ── FILTER NAV ── */
+  nav.filter-nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav.filter-nav::-webkit-scrollbar { display: none; }
+
+  .filter-inner {
+    display: flex;
+    gap: 4px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 0;
+    white-space: nowrap;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { background: var(--tag-bg); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 64px 0;
+    color: var(--muted);
+    font-style: italic;
+    display: none;
+  }
+
+  /* ── DEPARTMENT SECTION ── */
+  .dept-section {
+    margin-bottom: 56px;
+  }
+
+  .dept-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .dept-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .dept-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .dept-count {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── COURSE CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 26px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--dept-color, var(--accent));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .card:hover::after { opacity: 1; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .level-badge {
+    flex-shrink: 0;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .badge-hl { background: #fef3c7; color: #92400e; }
+  .badge-sl { background: #dcfce7; color: #166534; }
+  .badge-ab { background: #f3e8ff; color: #6b21a8; }
+  .badge-core { background: #e0f2fe; color: #0c4a6e; }
+  .badge-other { background: #f1f5f9; color: #475569; }
+
+  .card-preview {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+
+  .card-dept-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .read-more-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ── MODAL ── */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,46,0.65);
+    z-index: 200;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    overflow-y: auto;
+  }
+
+  .overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--card);
+    border-radius: 18px;
+    width: 100%;
+    max-width: 720px;
+    padding: 0;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.25s;
+    position: relative;
+    margin: auto;
+  }
+
+  .overlay.open .modal { transform: translateY(0); }
+
+  .modal-header {
+    padding: 32px 36px 24px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .modal-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .modal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    padding-right: 48px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: var(--rule);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .modal-close:hover { background: #d1d5db; }
+
+  .modal-body {
+    padding: 28px 36px 36px;
+  }
+
+  .modal-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .modal-text {
+    font-size: 15px;
+    line-height: 1.78;
+    color: #374151;
+  }
+
+  .modal-text p { margin-bottom: 16px; }
+  .modal-text p:last-child { margin-bottom: 0; }
+
+  /* ── INTRO BLOCK ── */
+  .intro-card {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 14px;
+    padding: 36px 40px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-card::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 200px;
+    position: absolute;
+    top: -40px;
+    right: 20px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .intro-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .intro-card p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #cbd5e1;
+    max-width: 680px;
+  }
+
+  /* ── UTILS ── */
+  mark {
+    background: var(--hl-marker);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 640px) {
+    header { padding: 48px 20px 40px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .modal-header, .modal-body { padding-left: 22px; padding-right: 22px; }
+    .modal-title { font-size: 1.4rem; }
+    .intro-card { padding: 26px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <span class="school-label">Harrison High School · IB Diploma Programme</span>
+  <h1>The <em>Course</em><br>Selection Guide</h1>
+  <p class="header-sub">Insight and overviews from students and teachers for every IB class offered at Harrison.</p>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="search" placeholder="Search courses…" autocomplete="off">
+  </div>
+</header>
+
+<!-- FILTER NAV -->
+<nav class="filter-nav" aria-label="Filter by department">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All Courses</button>
+    <button class="filter-btn" data-filter="Humanities">Humanities</button>
+    <button class="filter-btn" data-filter="Science">Science</button>
+    <button class="filter-btn" data-filter="Language">Language</button>
+    <button class="filter-btn" data-filter="Mathematics">Mathematics</button>
+    <button class="filter-btn" data-filter="Arts">Arts</button>
+    <button class="filter-btn" data-filter="Core">Core</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="intro-card">
+    <span class="intro-label">Welcome</span>
+    <p>Selecting your IB courses is a big deal; these will be classes that will follow you through 11th and 12th grade. This guide aims to make that easier. This guide covers every IB class offered at Harrison High School. Giving you insight and an overview of them through the view of both teachers and students.</p>
+  </div>
+
+  <div id="course-container"></div>
+  <p class="no-results" id="no-results">No courses match your search.</p>
+</main>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-eyebrow" id="modal-dept"></span>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badges" id="modal-badges"></div>
+      <div class="modal-text" id="modal-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COURSES = [
+  {
+    dept: "Humanities",
+    deptColor: "#6366f1",
+    courses: [
+      {
+        title: "IB History of the Americas",
+        level: "HL/SL",
+        badge: "hl",
+        preview: "Explores major events, movements, and perspectives across the Americas from a variety of time periods, mostly from the United States.",
+        body: `IB History of the Americas is a challenging but rewarding course that explores major events, movements, and perspectives across the Americas from a variety of time periods, mostly from the United States. Rather than covering a wide range of topics quickly, the course focuses on fewer subjects and explores each one in much greater detail, requiring students to think critically, consider multiple viewpoints, and develop strong analytical skills. The course can be taken as a standalone class or as the first part of a two-year Higher Level IB history sequence.
+
+Students rate the course difficulty around a 7 or 8 out of 10, but most earn grades between 86% and 96%, showing that the workload is manageable for students who stay on top of it. Homework averages one to two hours per week, with longer research and writing assignments spread throughout the year that require good time management, which is key to succeeding in this course. Assessments include weekly quizzes, with major exams that are primarily essay-based. Students also work on research projects that build toward the Internal Assessment (IA), a historical research project begun in 11th grade and completed in 12th grade.
+
+Students give the course an overall rating of 4 out of 5 and consistently point to class discussions and the communication aspects of the course as standout highlights. The course creates space for students to share their thinking, engage with different perspectives, and grow in confidence as writers and speakers. This course is best suited for students who enjoy history, are interested in developing their critical thinking and writing skills, and aren't afraid of a challenge. Overall, students strongly recommend History of the Americas for its engaging discussions, reasonable workload, and the deeper understanding of history it builds over time.`
+      },
+      {
+        title: "IB 20th Century World History",
+        level: "HL/SL",
+        badge: "hl",
+        preview: "Explores major global events, political movements, and leaders from the mid-1800s through the end of the Cold War.",
+        body: `IB 20th Century World History is a rigorous but manageable history course that explores major global events, political movements, and leaders from the mid-1800s through the end of the Cold War. Students study topics such as communist regimes under Lenin, Stalin, and Mao, Latin American authoritarian leaders, the Cold War, and comparisons between Jim Crow segregation in the United States and apartheid in South Africa. The course can be taken as a continuation of History of the Americas (HL) or as a standalone SL course.
+
+Students generally describe the class as interesting, insightful, and less stressful than expected. While many entered the course expecting frequent essays and heavy testing, most found that assessments are spread out and that class time focuses on developing historical thinking and essay-writing skills. Homework is usually limited to one to three hours per week, but students should be prepared for long-term research and writing assignments that require strong time-management skills.
+
+Many students enjoyed the wide range of topics, documentaries, discussions, and the opportunity to connect historical events to issues that still impact the world today. Students consistently highlighted Ms. Mak's supportive teaching style and passion for history as a major strength of the course.
+
+This class is best suited for students interested in history, politics, reading, and writing. Overall, students strongly recommend the course for its engaging content, reasonable workload, and real-world relevance.`
+      },
+      {
+        title: "IB Economics",
+        level: "HL/SL",
+        badge: "hl",
+        preview: "Examines how individuals, businesses, and governments make choices when resources are limited—connecting directly to current events.",
+        body: `IB Economics is an analytical, discussion-based course that examines how individuals, businesses, and governments make choices when resources are limited. Students study microeconomics, macroeconomics, the global economy, and economic development through a combination of theory, diagrams, data analysis, and real-world examples. Nearly every unit connects directly to current events, covering topics such as inflation, unemployment, taxes, minimum wages, environmental policy, and international trade. The course helps students understand why prices change, why governments intervene in markets, and why every economic policy creates both benefits and costs. It is available at both SL and HL levels, with HL students covering additional content and facing greater math and exam demands.
+
+Students rate the course difficulty a 7 out of 10, but with only one to two hours of studying per week and monthly tests, the workload is steady and manageable for students who keep up with the material. Assessments include short-answer and extended-response questions, diagram-based analysis, data-response questions, and timed IB-style essays. Students also complete an Internal Assessment portfolio built around real-world news articles, which gives them the chance to apply economic thinking to events happening in the world around them. To do well, students should practice drawing diagrams neatly and accurately, explain every step in their reasoning rather than jumping to conclusions, and always connect their answers to real-world examples.
+
+Students give the course an overall rating of 4 out of 5. This course is best suited for students who are curious about current events, politics, business, and government policy, and who enjoy debating ideas and analyzing cause and effect. No prior experience is required to enroll. Overall, students recommend IB Economics for its real-world relevance, engaging discussions, and the strong critical thinking and analytical skills it builds over time.`
+      },
+      {
+        title: "IB Business Management HL",
+        level: "HL",
+        badge: "hl",
+        preview: "A comprehensive study of how businesses operate, grow, and respond to challenges—covering marketing, finance, accounting, and operations.",
+        body: `IB Business Management HL provides a comprehensive study of how businesses operate, grow, and respond to challenges in a changing world. The course covers key areas including business organization, marketing, finance, accounting, and operations management while exploring these topics in greater depth than the SL course. Students learn to evaluate business decisions, analyze real-world situations, and consider both financial and social impacts of business activities.
+
+The course places a strong emphasis on critical thinking, communication, and applying concepts to realistic business scenarios. Assessments are primarily based on case studies and written responses that require students to analyze information and defend their conclusions. Students also complete an Internal Assessment focused on a real company and prepare for IB examinations, including HL-specific content related to social enterprise and business impact.
+
+Students frequently highlighted the broad curriculum, practical applications, and opportunities to develop confidence in public speaking. Presentations are a major component of the course, including longer presentations that help students strengthen communication skills. Many students also appreciated learning concepts that relate directly to entrepreneurship, marketing, finance, and management.
+
+The most common challenges involved presentations, extensive note-taking, accounting and finance calculations, and adapting to IB-style written responses. Success in the course often comes from attending class regularly, staying engaged, and focusing on understanding concepts rather than memorizing definitions.
+
+This course is especially well suited for students considering business-related fields in college or careers that require analytical and communication skills. Overall, students would recommend HL Business Management for its college-level preparation, practical content, and broad overview of the business world.`
+      },
+      {
+        title: "IB Business Management SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Introduces the fundamentals of how businesses operate and make decisions, covering organization, marketing, finance, and human resources.",
+        body: `IB Business Management SL introduces students to the fundamentals of how businesses operate and make decisions. Throughout the course, students explore topics such as business organization, marketing, finance, accounting, operations management, and human resources. The class focuses on understanding how businesses function in real-world situations and how different areas of a company work together to achieve goals.
+
+Students can expect a combination of class discussions, case studies, written responses, projects, and presentations. Assessments emphasize analyzing business situations, applying concepts, and explaining decisions rather than memorizing facts. Students also complete the Internal Assessment (IA), which involves investigating a real business issue using business management tools and concepts.
+
+Many students appreciated the practical nature of the course and enjoyed learning about familiar companies and brands. The class was often described as engaging, with opportunities to work collaboratively and develop presentation skills. Students also valued how the content connected to everyday life and future careers.
+
+Common challenges included presentations, taking detailed notes, and some finance and accounting topics. However, prior business experience is not required, and students generally found the material manageable when they stayed engaged and completed classwork consistently.
+
+This course is a strong choice for students interested in business or looking to develop practical skills that can be applied in many future careers. Overall, students would recommend the course for its real-world relevance, approachable workload, and useful introduction to business concepts.`
+      },
+      {
+        title: "IB Psychology HL",
+        level: "HL",
+        badge: "hl",
+        preview: "Examines human behavior and mental processes from biological, cognitive, and sociocultural perspectives over two years.",
+        body: `IB Psychology HL is a two-year course that examines human behavior and mental processes from multiple perspectives. Students explore how biological factors, cognitive processes, and social and cultural influences shape the way people think, feel, and act. The course also emphasizes psychological research, requiring students to evaluate evidence and apply theories to real-world situations.
+
+The class involves substantial note-taking, regular studying, and analytical writing. Assessments focus on explaining psychological concepts and supporting arguments with evidence from research and real-life examples. Students also complete the Internal Assessment (IA), which allows them to conduct and analyze their own psychological investigation. Because much of the learning builds over time, success depends on staying organized and consistently reviewing material rather than cramming before exams.
+
+Many students appreciate how psychology relates to everyday life and helps them better understand themselves and others. Interactive activities, discussions, and real-world applications are frequently highlighted as enjoyable aspects of the course. Students also value the opportunity to develop critical thinking and analytical skills that extend beyond the classroom.
+
+The most common challenges include memorizing studies, keeping up with notes, writing strong evidence-based responses, and completing the IA. While the course contains a large amount of content, students generally find it manageable with regular effort and genuine interest in the subject.
+
+This course is ideal for students who are curious about human behavior and motivated to engage deeply with psychological concepts. Overall, students would recommend Psychology HL for its relevance, depth, and strong connection to real-life experiences.`
+      },
+      {
+        title: "IB Psychology SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Explores why people think, feel, and behave the way they do through biological, cognitive, and sociocultural perspectives.",
+        body: `IB Psychology SL explores why people think, feel, and behave the way they do. The course examines human behavior through biological, cognitive, and sociocultural perspectives, helping students understand how the brain, thought processes, and environment influence everyday actions. Students also learn about psychological research methods and how psychologists gather evidence to support their conclusions.
+
+The class is heavily focused on learning and applying psychological studies and theories. Students can expect frequent note-taking, class discussions, interactive activities, quizzes, and written assessments. Rather than relying on multiple-choice tests, many assessments require students to explain concepts and support their answers with evidence. Staying organized and keeping up with notes is important, as much of the material builds upon previous topics.
+
+Students often enjoy the real-world relevance of the course and appreciate how psychology connects directly to their own experiences and relationships. Many also find the class engaging because of the discussions and activities that help illustrate psychological concepts. Common challenges include memorizing studies, managing large amounts of information, and writing evidence-based responses.
+
+No previous psychology experience is required, making the course accessible to a wide range of students. This class is best suited for curious students who enjoy learning about human behavior and are willing to stay consistent with studying. Overall, students would recommend Psychology SL for its interesting content, practical applications, and manageable workload.`
+      }
+    ]
+  },
+  {
+    dept: "Science",
+    deptColor: "#0891b2",
+    courses: [
+      {
+        title: "IB Physics SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Explores the physical world through observation, modeling, experimentation, and problem-solving—more demanding than typical Regents or Honors science.",
+        body: `IB Physics SL is a challenging science course that explores how the physical world works through observation, modeling, experimentation, and problem-solving. Students study topics such as motion, forces, energy, electricity, waves, atomic structure, nuclear physics, and astrophysics. The course emphasizes understanding concepts and applying them to new situations rather than simply memorizing formulas.
+
+Many students enter the course expecting an easier experience because it is an SL class, but a common theme is that Physics SL is significantly more demanding than a typical Regents or Honors science course. Students are expected to think critically, solve multi-step problems, and regularly apply mathematical skills, including algebra and some trigonometry.
+
+Assessments include frequent quizzes, unit tests, laboratory investigations, and an independent scientific investigation. Labs are often cited as one of the most enjoyable parts of the course because they allow students to connect abstract concepts to real-world situations. Students also appreciate how the class helps explain everyday phenomena and develops analytical thinking skills.
+
+Success in Physics SL requires consistent practice, strong study habits, and a willingness to ask questions when concepts become difficult. This course is best suited for students who enjoy science and problem-solving and are looking for a rigorous challenge beyond the Honors or Regents level. Overall, students recommend the course to those who are genuinely interested in understanding how the world works.`
+      },
+      {
+        title: "IB Physics HL",
+        level: "HL",
+        badge: "hl",
+        preview: "One of the most rigorous courses at Harrison—covering mechanics, energy, waves, relativity, and more at a fast pace with deep analytical demands.",
+        body: `IB Physics HL is one of the most rigorous courses offered at Harrison High School. Building on the same core concepts as SL, the HL course covers a significantly larger amount of material at a much faster pace while maintaining the same depth of conceptual understanding. Students explore mechanics, energy, electricity and magnetism, waves, atomic and nuclear physics, astrophysics, relativity, and additional advanced topics unique to HL.
+
+The course focuses heavily on analytical thinking, modeling, and problem-solving. Unlike many science classes that rely on memorization, Physics HL requires students to apply concepts to unfamiliar situations and develop solutions through logical reasoning. Many students describe it as one of their most challenging classes because success depends on understanding ideas rather than memorizing procedures.
+
+Students complete regular homework, weekly quizzes, major unit exams, laboratory investigations, and the IB Individual Investigation. Labs and demonstrations are consistently identified as highlights of the course, helping students visualize difficult concepts and connect physics to real-world situations. However, students also note that tests can be demanding and often require substantial preparation outside of class.
+
+Physics HL is best suited for highly motivated students who enjoy mathematics, science, and intellectual challenges. Strong study habits and consistent effort are essential, as concepts build continuously throughout the course. Based on student and teacher feedback, this course is highly recommended for students interested in STEM fields and those seeking one of the most academically demanding courses available.`
+      },
+      {
+        title: "IB Biology HL",
+        level: "HL",
+        badge: "hl",
+        preview: "A rigorous, content-rich science course exploring living systems through cell biology, genetics, evolution, ecology, and human physiology.",
+        body: `IB Biology HL is a rigorous, content-rich science course that explores living systems at a much deeper level than previous biology classes. Students study topics such as cell biology, genetics, evolution, ecology, human physiology, and the interactions between organisms and their environments. Throughout the course, students learn not only how biological systems function but also how scientific discoveries and experiments have shaped our understanding of life.
+
+A major component of the course is developing strong scientific thinking and study skills. While biology is often associated with memorization, students quickly discover that success requires understanding how concepts connect across units and applying that knowledge to unfamiliar situations. Many students note that topics build on one another throughout both years of the course, making consistent effort especially important.
+
+Assessments include regular quizzes, unit tests, laboratory investigations, and independent learning objectives that serve as both homework and study materials. Hands-on activities, dissections, interactive labs, and collaborative modeling exercises are frequently cited as highlights of the course because they help students visualize complex processes and make challenging content easier to understand.
+
+The greatest challenge is keeping up with the volume of information and regularly reviewing material outside of class. Students who stay organized and complete objectives consistently tend to find the course much more manageable.
+
+This course is best suited for students interested in biology, medicine, health sciences, or other STEM fields. Based on student feedback, IB Biology HL is highly recommended for students who enjoy science and are prepared for a demanding but rewarding academic experience.`
+      },
+      {
+        title: "IB Design Technology SL",
+        level: "SL",
+        badge: "sl",
+        preview: "An innovative, engineering-focused course introducing students to the fundamentals of how real-world products and systems are designed and built.",
+        body: `IB Design Technology SL is an innovative, engineering-focused course that introduces students to the fundamentals of how real-world products and systems are designed and built. The course covers core design technology content with a focus on applying engineering concepts to practical, real-world scenarios. Compared to HL, SL covers a narrower range of content, focusing on the foundational material needed to complete the Internal Assessment, which accounts for 40% of the final IB grade. Testing is infrequent, making the course feel more project-driven and manageable for students balancing a full diploma schedule.
+
+Students rate the course difficulty a 5 out of 10, reflecting its accessibility for students who stay on top of the material. One of the most important habits to develop in this course is strong note-taking. Understanding the course terminology and key concepts is critical, as they can be applied to a wide range of IB questions. A background in CAD software, specifically Onshape, is strongly recommended before entering the course, as it plays a central role in designing and producing project work. Students who come in without that background should be prepared to learn it independently. Students also consistently highlight the teacher as their favourite part of the course, pointing to the supportive and engaging classroom environment as a major strength.
+
+Students give the course an overall rating of 4 out of 5, with an enjoyment rating of 6 out of 10. This course is best suited for students with an interest in engineering, design, and hands-on problem-solving. Overall, IB Design Technology SL is a practical and rewarding course that gives students a real-world foundation in design thinking and engineering principles.`
+      },
+      {
+        title: "IB Design Technology HL",
+        level: "HL",
+        badge: "hl",
+        preview: "A crash-course introduction to mechanical, electrical, and civil engineering—covering structural systems, production, and original design projects.",
+        body: `IB Design Technology HL is an innovative, engineering-focused course that serves as a crash-course introduction to the basics of mechanical, electrical, and civil engineering. Students explore real-world problems and learn how products and systems are designed and built, making it one of the most directly applicable IB courses available. HL students cover significantly more content than SL, including structural systems, mechanical systems, electrical systems, manufacturing techniques, and production systems, all of which are exclusive to the HL level. Because of the additional content, the IA accounts for 30% of the final IB grade and the HL exam is longer to reflect the broader scope of the course.
+
+Students rate the course difficulty a 6 out of 10, with monthly tests and project-based work making up the bulk of assessments alongside the Internal Assessment. Students consistently highlight projects as the best part of the course, particularly the challenge of coming up with an original design and following it through to completion. One key tip for success is strong note-taking. Knowing the course terminology and concepts inside and out is essential, as it allows students to apply them confidently to any question the IB presents. A background in CAD software, specifically Onshape, is strongly recommended before entering the course, as it is central to designing and producing project work.
+
+Students give the course an overall rating of 4 out of 5. This course is best suited for students with an interest in engineering, design, and real-world problem-solving. Overall, students recommend IB Design Technology HL for its hands-on projects, real-world relevance, and the practical engineering skills it develops over time.`
+      },
+      {
+        title: "IB Sports, Exercise & Health Science SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Explores how the human body responds to exercise and training—closer to a biology course than a sports class, with anatomy, physiology, and biomechanics.",
+        body: `IB Sports, Exercise and Health Science SL explores how the human body responds to exercise, training, nutrition, and physical activity. While many students expect the course to focus primarily on sports, the class is actually much closer to a biology course that applies scientific concepts to exercise and athletic performance. Topics include anatomy, physiology, nutrition, biomechanics, and the body's systems, helping students understand how different parts of the body work together during physical activity.
+
+Students can expect a combination of note-taking, laboratory investigations, class discussions, and assessments that require both scientific understanding and memorization. Labs are a major component of the course and often allow students to apply concepts through hands-on experiences. Although the workload is generally considered manageable, students consistently emphasized the importance of keeping up with notes and studying regularly because the course contains a significant amount of vocabulary and content.
+
+Many students enjoyed learning how the material connects to everyday life, fitness, nutrition, and personal health. The real-world applications of the course and the opportunity to better understand their own bodies were frequently mentioned as highlights. Students also appreciated the engaging classroom environment and supportive teachers.
+
+Common challenges included memorizing large amounts of information and mastering scientific terminology. However, students generally found the material easy to understand when they stayed organized and prepared for assessments.
+
+This course is an excellent choice for students interested in sports, health, fitness, or biology. Overall, students would recommend the class for its practical applications, engaging content, and approachable workload.`
+      }
+    ]
+  },
+  {
+    dept: "Language",
+    deptColor: "#16a34a",
+    courses: [
+      {
+        title: "IB English Language & Literature SL",
+        level: "SL",
+        badge: "sl",
+        preview: "A unique English course analyzing literary and non-literary texts—ads, paintings, films, graphic novels, poetry—not just novels.",
+        body: `IB Language and Literature SL is a unique English course that focuses on both literary and non-literary texts. Rather than reading novel after novel, students analyze a wide variety of materials, including advertisements, paintings, photographs, films, graphic novels, poetry, and traditional literature. The course emphasizes critical thinking, communication, collaboration, and analysis of how authors and creators use different techniques to convey meaning.
+
+Many students enter the course expecting extensive reading, but are surprised by the variety of topics and visual texts explored throughout the year. Students frequently work in groups, complete writing assignments, participate in discussions, and learn how to analyze both written and visual media. The workload is generally considered manageable, with most students spending one to two hours per week on homework and studying.
+
+Students particularly enjoyed the collaborative nature of the class, the diverse topics covered, and the units that connected to real-world media and advertising. Several students appreciated that the course felt different from a traditional English class and allowed them to explore ideas beyond books alone. Some students found repeated analysis activities, certain reading units, or large writing assignments less engaging.
+
+Success in this course comes from staying organized, communicating with teachers, and keeping up with assignments. Overall, students recommend IB Language and Literature SL to those who enjoy discussion, analysis, and exploring how language and media shape the world around us.`
+      },
+      {
+        title: "IB English Literature HL",
+        level: "HL",
+        badge: "hl",
+        preview: "A discussion-based English course reading novels, plays, and poems from different cultures—emphasizing interpretation, analysis, and strong writing.",
+        body: `IB Literature HL is a discussion-based English course designed for students who enjoy reading, analyzing complex ideas, and exploring literature from different cultures and perspectives. Over two years, students read a wide variety of novels, plays, poems, and other literary works while developing their writing, discussion, and critical thinking skills. Although many students enter the course expecting an overwhelming amount of reading, most found the workload manageable when they stayed consistent and avoided procrastination.
+
+A typical unit focuses on one literary work at a time, with students discussing themes, characters, symbolism, and authorial choices through seminar-style conversations and group discussions. Assessments often include reading quizzes, analytical essays, on-demand writing assignments, the Individual Oral (IO), and the HL Essay completed during junior year. The course emphasizes interpretation and analysis rather than memorization, encouraging students to share their ideas and engage with different viewpoints.
+
+Students consistently highlighted discussions as their favourite part of the class. Many enjoyed hearing different perspectives, exploring deeper meanings within texts, and developing stronger writing and argumentation skills. While some students did not enjoy every book that was assigned, most agreed that the variety of literature exposed them to new cultures, experiences, and ways of thinking.
+
+Success in this class depends heavily on time management. Students repeatedly emphasized the importance of keeping up with the reading schedule and participating in discussions. Overall, IB Literature HL is best suited for curious students who enjoy reading and are willing to challenge themselves. While it is considered one of the more demanding English options, students generally found it rewarding and highly beneficial for developing skills that transfer directly to college and beyond.`
+      },
+      {
+        title: "IB Spanish Ab Initio",
+        level: "Ab Initio",
+        badge: "ab",
+        preview: "A welcoming course for students with little to no Spanish experience—building proficiency from the ground up through five real-world themes.",
+        body: `IB Spanish Ab Initio is a welcoming, culturally rich language course designed for students with little to no prior experience in Spanish. Over two years, the course builds proficiency from the ground up, developing speaking, reading, writing, and listening skills through five real-world themes: identities, experiences, social organization, how we share the planet, and human ingenuity. More than just a language course, Ab Initio celebrates cultural differences and encourages students to step outside their comfort zones, value other perspectives, and develop a sense of international-mindedness. It is one of the few courses in the school day where being different is not just acknowledged but actively celebrated.
+
+Students rate the course difficulty a 7 out of 10, with monthly tests and quizzes providing regular but manageable checkpoints throughout the year. Classroom activities are consistently highlighted as the best part of the course, with students enjoying the interactive and supportive learning environment. Students give the course an enjoyment rating of 8 out of 10 and an overall rating of 4 out of 5. No prior Spanish experience is required; students can enter with absolutely no background in the language and still succeed. That said, students coming in with no Spanish exposure should expect some extra effort early on to build a foundation, and taking advantage of any additional support offered at the start of the year is strongly encouraged.
+
+This course is best suited for students who are curious, open-minded, and willing to make mistakes in the process of learning something new. Overall, Spanish Ab Initio is a unique and rewarding course that not only teaches a new language but also broadens students' understanding of the world, a skill that will prove valuable in college, careers, and everyday life.`
+      },
+      {
+        title: "IB Spanish SL",
+        level: "SL",
+        badge: "sl",
+        preview: "A grammar-heavy language course building strong Spanish proficiency over two years through five real-world themes—rated 5/5 by students.",
+        body: `IB Spanish SL is a cultural, engaging, and challenging language course that builds strong proficiency in Spanish over two years, covering speaking, reading, writing, and listening skills. The course is organized around five real-world themes: identities, experiences, social organization, how we share the planet, and human ingenuity, making it one of the most globally connected courses in the IB Diploma Programme. Spanish SL is grammar-heavy by design, with a strong emphasis on mastering grammatical structures that appear directly on the IB exam. This focus on grammar gives students a deep technical foundation in the language, though it does leave less room for creative or exploratory activities compared to other Spanish courses.
+
+Students rate the course difficulty a 7 out of 10, with weekly tests and quizzes keeping the workload consistent throughout the year. Staying on top of vocabulary, grammar rules, and course content week to week is essential to success. Despite the challenge, students give the course an enjoyment rating of 8 to 9 out of 10 and an overall rating of a perfect 5 out of 5, making it one of the highest-rated courses available. This course is best suited for students who have a solid background in Spanish and are ready to take their skills to a higher level of technical precision and academic rigour.
+
+No formal prerequisites are listed, but students should come in with a strong foundation in Spanish from prior coursework. Overall, Spanish SL is a highly rewarding course that pushes students to master the language at a sophisticated level while connecting them to cultures and perspectives beyond their own skills that will serve them well in college, careers, and everyday life in an increasingly Spanish-speaking world.`
+      },
+      {
+        title: "IB Spanish HL",
+        level: "HL",
+        badge: "hl",
+        preview: "A literature-based course for near-native or native Spanish speakers—engaging with the language at an intellectual and analytical level.",
+        body: `IB Spanish HL is a literature-based, higher-level language course designed primarily for near-native or native Spanish speakers looking to develop academic and analytical proficiency in the language. The course takes a deeply meta approach to Spanish, using literature and complex texts as the foundation for developing higher-level thinking, interpretation, and communication skills. Rather than focusing on grammar drills or vocabulary building, Spanish HL challenges students to engage with the language at an intellectual level, analyzing works and ideas in ways that mirror college-level literary study. It is one of the most unique courses in the diploma program for students who already speak Spanish at home or have grown up in a bilingual environment.
+
+Students rate the course difficulty just a 4 out of 10, reflecting the natural advantage that near-native speakers bring to the course. Weekly tests and quizzes keep students engaged and accountable, but the overall workload feels manageable for students with a strong Spanish background. Students consistently highlight classroom activities as the best part of the course, pointing to the engaging and dynamic learning environment as a major strength. Students give the course an enjoyment rating of 8 out of 10 and an overall rating of 5 out of 5, making it one of the top-rated courses in the program.
+
+This course is best suited for students who are near-native or native Spanish speakers and are ready to engage with the language at an academic and literary level. There have traditionally been one or two non-native speakers in HL, but students should be aware that the course is literature-heavy and requires a very high level of fluency. Overall, Spanish HL is a deeply enriching course that helps bilingual students become biliterate and gives them the academic tools to use Spanish confidently in college and beyond.`
+      },
+      {
+        title: "IB French SL",
+        level: "SL",
+        badge: "sl",
+        preview: "A two-year French course organized around five IB themes—more manageable than expected, with a supportive small-class environment.",
+        body: `IB French SL is a two-year language course designed for students who want to continue developing their French skills while earning an IB course credit. The curriculum is organized around five major IB themes: identities, experiences, human ingenuity, social organization, and sharing the planet. Throughout the course, students practice all aspects of language learning, including speaking, listening, reading, and writing, while exploring real-world topics and cultures.
+
+Many students reported entering the course expecting it to be very difficult, but most found it more manageable than anticipated. While there are frequent quizzes and assessments, students generally felt that the workload was reasonable and that the class environment was supportive. The small class sizes allow students to receive individual help from the teacher and participate in projects that offer flexibility and creativity.
+
+Students particularly enjoyed the relaxed classroom atmosphere, opportunities to work with friends, and the chance to improve their French in practical ways. Several students also appreciated learning about different cultures and developing communication skills that extend beyond the classroom. The most common challenge mentioned was the frequency of quizzes and tests, which require students to stay consistent with their studying.
+
+Students recommend paying attention in class, completing assignments regularly, and avoiding last-minute studying, as language learning develops gradually over time. Overall, students describe IB French SL as an enjoyable and accessible course that helps build confidence in French while preparing students for future academic and real-world communication.`
+      },
+      {
+        title: "IB French HL",
+        level: "HL",
+        badge: "hl",
+        preview: "An advanced two-year French course—challenging but rewarding, with small class sizes and individualized support from the teacher.",
+        body: `IB French HL is an advanced two-year language course intended for students who enjoy French and want to challenge themselves beyond the SL level. While HL covers the same IB themes as SL, students are expected to complete additional reading, writing, and presentation work. The course focuses on strengthening communication skills while helping students develop a deeper understanding of the French language and culture.
+
+Students described the class as challenging but rewarding. Many expected the course to be much more difficult than it ultimately was, with several noting that the supportive classroom environment made the workload manageable. Assessments occur regularly and often include reading comprehension, writing assignments, presentations, and quizzes. Students reported spending one to two hours per week on homework and studying, although consistency is important for success.
+
+One of the most frequently praised aspects of the course is the small class size, which allows for individualized support and meaningful interactions with the teacher. Students also enjoyed improving their speaking and writing abilities while gaining a greater appreciation for French culture. Some students found grammar work, worksheets, and frequent quizzes less enjoyable, but most agreed that these activities contributed to language growth.
+
+The most common advice is to complete assignments consistently, study vocabulary regularly, and choose HL based on personal ability and interest rather than because friends are taking it. Overall, students recommend IB French HL to motivated language learners who want to strengthen their French skills and are willing to commit to a more advanced level of study.`
+      },
+      {
+        title: "IB Italian SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Builds communication skills through Italian language and culture—covering identity, social organization, and environmental issues.",
+        body: `IB Italian SL helps students strengthen their communication skills while developing a deeper understanding of Italian language and culture. The course follows the IB language curriculum and explores themes such as identity, human experiences, social organization, environmental issues, and human innovation. Students regularly practice speaking, listening, reading, and writing in Italian while discussing real-world topics and cultural perspectives.
+
+The course builds upon the grammar, vocabulary, and language skills learned in previous Italian classes. Students complete a variety of activities including class discussions, presentations, reading assignments, listening exercises, and written assessments. Writing tasks and oral communication are important parts of the course, and students are expected to steadily improve their ability to express ideas in Italian. Assessments often include reading comprehension, writing assignments, quizzes, and preparation for the IB oral exam.
+
+Students frequently enjoy the opportunity to speak Italian in class and appreciate the engaging classroom atmosphere. Many also value the cultural connections and interactive activities that make language learning more enjoyable. Common challenges include memorizing vocabulary, mastering verb conjugations, preparing for essays, and maintaining consistent language practice.
+
+This course is best suited for students with a solid foundation in Italian who are interested in continuing their language studies. Overall, students would recommend the course for its supportive environment, practical language development, and meaningful cultural experiences.`
+      },
+      {
+        title: "IB Italian HL",
+        level: "HL",
+        badge: "hl",
+        preview: "An advanced two-year Italian course exploring culture and global issues in depth—with literary works and extensive writing tasks.",
+        body: `IB Italian HL is a two-year language course designed for students who want to further develop advanced communication skills while exploring Italian culture and global issues in greater depth. The course follows the IB language curriculum, focusing on themes such as identity, human experiences, social organization, environmental responsibility, and technological progress. Through these topics, students learn to communicate effectively while gaining a broader understanding of Italian-speaking communities and contemporary issues.
+
+Students are expected to enter the course with a strong foundation in Italian grammar and vocabulary. The class emphasizes all four language skills: speaking, listening, reading, and writing. Coursework includes class discussions, presentations, collaborative projects, written assignments, and preparation for the IB oral assessment. HL students complete more extensive writing tasks than SL students and are expected to produce longer, more detailed responses. Reading literary works is also part of the HL experience.
+
+Students often highlight the collaborative classroom environment and the opportunity to become more confident speakers. Many find the course challenging but manageable when they stay engaged and consistently practice the language. Common challenges include essay writing, participation, reading assignments, and maintaining strong grammar and vocabulary skills.
+
+This course is ideal for students who enjoy language learning and are willing to continue developing their Italian skills beyond the classroom. Overall, students would recommend IB Italian HL for its balance of challenge, cultural exploration, and long-term language growth.`
+      }
+    ]
+  },
+  {
+    dept: "Mathematics",
+    deptColor: "#7c3aed",
+    courses: [
+      {
+        title: "IB Math Analysis & Approaches SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Builds on Algebra II with more advanced mathematical thinking—many students find it more manageable than expected with consistent effort.",
+        body: `IB Math Analysis and Approaches SL is a math course that builds upon the concepts learned in Algebra II while introducing students to more advanced mathematical thinking. Many students described the course as an extension of previous math classes rather than a completely new experience. Because of this, several students found the class easier than they initially expected, even though they were nervous about taking an IB-level math course.
+
+Most students reported that the course is manageable as long as they stay on top of assignments and complete the nightly homework. Homework and studying generally range from one to four hours per week, with quizzes and tests occurring regularly throughout the year. Students noted that the material often reflects what is practiced in class, making preparation straightforward for those who consistently review the content.
+
+Students enjoyed practice days, review sessions, and the opportunity to build confidence in their math skills. Many appreciated that the class strengthened concepts from Algebra II while providing a foundation for future math courses. Several students also felt that the course helped improve problem-solving skills and could be useful preparation for standardized tests.
+
+The most common challenges involved staying caught up after missing class and completing some of the more difficult problem-solving activities. A few students also mentioned not enjoying certain group assignments.
+
+The most common advice from current students is to complete homework regularly, pay attention during lessons, and seek extra help when needed. Overall, students generally recommend IB Math Analysis and Approaches SL because it offers a balanced level of difficulty, helps develop strong math skills, and is accessible to a wide range of learners.`
+      },
+      {
+        title: "IB Math Applications & Interpretations SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Focuses on using mathematics to solve real-world problems—covering statistics, probability, financial math, and introductory calculus.",
+        body: `IB Math Applications and Interpretations SL focuses on using mathematics to solve real-world problems and interpret data. The course covers topics such as algebra, functions, statistics, probability, financial mathematics, and introductory calculus. Students learn how mathematical concepts can be applied to practical situations, making the course especially relevant to everyday decision-making and many college and career pathways.
+
+Students can expect regular homework, problem-solving activities, projects, and assessments that require both mathematical understanding and application. Success in the course often depends on keeping up with assignments and practicing skills consistently. Several students emphasized that staying organized and completing work on time is important, especially because concepts build on one another throughout the year.
+
+Many students found the course more manageable than they initially expected. They appreciated the practical nature of the material, opportunities for independent work, and project-based assignments. Students also frequently highlighted the classroom environment and supportive instruction as positive aspects of the course.
+
+Common challenges included more advanced problem-solving questions, maintaining steady effort with homework, and understanding calculus-related concepts for students taking higher-level math courses simultaneously. Some students looking for a more theoretical or rigorous math experience felt that other mathematics pathways might provide a greater challenge.
+
+This course is well suited for students who want a practical, application-focused mathematics course with connections to real-world situations. Overall, students would recommend the course for its accessibility, useful content, and manageable workload.`
+      }
+    ]
+  },
+  {
+    dept: "Arts",
+    deptColor: "#e11d48",
+    courses: [
+      {
+        title: "IB Music SL",
+        level: "SL",
+        badge: "sl",
+        preview: "A creative course where students become researchers, composers, and performers—exploring musical styles from around the world.",
+        body: `IB Music SL is a creative, expansive, and deeply musical course that goes far beyond simply performing on an instrument. Students take on multiple roles as researchers, composers, and performers, exploring a wide range of musical styles and traditions, some familiar, some entirely new. The course challenges students to understand the compositional techniques behind the music they study and then demonstrate that understanding by creating their own compositions in a similar style. Rather than traditional tests, all assessments are portfolio-based, with SL students completing three projects: the Presenting Portfolio, the Experimenting Portfolio, and the Exploring Portfolio. Each portfolio captures a different dimension of the student's musical growth and is submitted digitally to IB examiners.
+
+Students should expect a moderate workload with a difficulty level around a 5 out of 10, manageable for students who come in with a strong musical foundation and stay on top of their portfolio work throughout the year. The course carries a high enjoyment rating of 8 out of 10, reflecting how engaging and personally meaningful students find the experience. Highlights include exploring unfamiliar music from around the world and developing a deeper understanding of music theory and composition. Prior experience in a performing ensemble, whether band, orchestra, choir, or music production, is strongly recommended, as the course assumes a baseline level of musical knowledge and builds from there.
+
+This course is best suited for serious music students who have a deep passion for music and want to move beyond performance into composition, theory, and creative expression. Overall, IB Music SL is a uniquely rewarding course that gives students the tools to understand, create, and communicate through music in ways that will stay with them for life.`
+      },
+      {
+        title: "IB Music HL",
+        level: "HL",
+        badge: "hl",
+        preview: "Challenges students as researchers, composers, performers, and collaborators—with a major Contemporary Music Maker project unique to HL.",
+        body: `IB Music HL is a creative, expansive, and deeply musical course that challenges students to engage with music as researchers, composers, performers, and collaborators. Students explore a wide range of musical styles and traditions from around the world, develop strong music theory and composition skills, and present their learning through a digital portfolio rather than traditional exams. HL students complete four portfolio projects: the Presenting Portfolio, the Experimenting Portfolio, the Exploring Portfolio, and the Contemporary Music Maker, the last of which is a major collaborative project unique to HL. In the Contemporary Music Maker project, students identify a musical need or collaboration opportunity, create and rehearse original music with peers, and bring it to life through a live performance. HL work is assessed at a higher standard by IB examiners, with greater expectations for depth of inquiry, writing quality, composition, and performance.
+
+Students rate the course difficulty between 3 and 7 out of 10, depending on the student, reflecting the fact that those with stronger musical backgrounds will find the work more natural, while others may find certain components more demanding. Students give the course an enjoyment rating of 8 out of 10 and a perfect 5 out of 5 overall, making it one of the highest-rated courses in the program. Exploring unfamiliar music from around the world is consistently highlighted as the best part of the course, while the writing components tend to be the least favourite for most students. Prior experience in a performing ensemble, whether band, orchestra, choir, or music production, is strongly recommended, as the course builds on an assumed baseline of musical knowledge.
+
+This course is best suited for serious, passionate music students who want to deepen their understanding of theory, composition, and the creative process. Overall, IB Music HL is an exceptional course for students who want to grow as musicians and thinkers, and whose love of music extends well beyond the stage.`
+      },
+      {
+        title: "IB Theatre SL",
+        level: "SL",
+        badge: "sl",
+        preview: "Examines acting, directing, and stage design through international theatre traditions—from Commedia dell'Arte to Brecht. No tests; all project-based.",
+        body: `IB Theatre SL is an inspiring, creative course that examines acting, directing, and stage design through a wide range of international and historical theatre traditions. Students explore styles such as Italian Commedia dell'Arte, Japanese Kyogen theatre, the realistic theatre of Ibsen and Stanislavski, and the political theatre of Bertolt Brecht. They also study solo practitioners like Anna Deavere Smith, explore devising companies such as Paper Birds and Frantic Assembly, and collaborate with classmates to create original theatre pieces. Long before Netflix and social media, theatre was one of the primary ways humans shared their stories, and the course connects that history to the media and storytelling traditions that shape the world today.
+
+One of the most interesting things about IB Theatre SL is that the experience varies widely from student to student. Difficulty ratings range from 3 to 8 out of 10, reflecting the fact that students with different backgrounds and comfort levels will find different parts of the course more or less challenging. Students who are comfortable with creative work may breeze through certain projects, while others may find some assignments more demanding. It is worth noting that research-based projects were the least favourite part of the course for many students, so coming in prepared to tackle those with patience will be helpful. All assessments are project-based, with no tests and no required study time outside of class.
+
+Students give the course an overall rating of 4 out of 5. While students with a theatre background naturally gravitate toward this course, no prior experience is required, and students from all backgrounds will find it thought-provoking and engaging. This course is especially recommended for diploma candidates with an interest in the humanities, creativity, and collaborative work. Overall, IB Theatre SL is a rewarding course that pushes students to take creative risks and connect with one of humanity's oldest art forms.`
+      },
+      {
+        title: "IB Theatre HL",
+        level: "HL",
+        badge: "hl",
+        preview: "One of the most accessible HL courses—rated 3/10 for difficulty, entirely project-based, with no tests and no required study outside class.",
+        body: `IB Theatre HL is an inspiring, creative course that examines acting, directing, and stage design through a wide range of international and historical theatre traditions. Students explore styles such as Italian Commedia dell'Arte, Japanese Kyogen theatre, the realistic theatre of Ibsen and Stanislavski, and the political theatre of Bertolt Brecht. They also study solo practitioners like Anna Deavere Smith, explore devising companies such as Paper Birds and Frantic Assembly, and collaborate with classmates to create original theatre pieces. Long before Netflix and social media, theatre was one of the primary ways humans shared their stories, and the course connects that history to the media and storytelling traditions that shape the world today. Compared to SL, HL students complete one additional assessment, adding greater depth to their overall theatre experience.
+
+Students rate the course just a 3 out of 10 for difficulty, with no tests and no required study time outside of class, making it one of the most accessible HL courses in the IB diploma program. All assessments are project-based, including a Production Proposal where students plan the directing of a published script, a Research Presentation on an unfamiliar international theatre form, a Collaborative Devised Piece created with classmates, and a Solo Show inspired by a theatre theorist. Each project gives students the chance to explore a different side of theatre and develop their creative voice in a supportive environment.
+
+Students give the course an overall rating of 4 out of 5. While students with a theatre background naturally gravitate toward this course, no prior experience is required, and students from all backgrounds will find it engaging and thought-provoking. This course is especially recommended for diploma candidates with an interest in the humanities, creativity, and collaborative work. Overall, IB Theatre HL is a highly rewarding course that pushes students to take creative risks, think critically about performance, and connect with one of humanity's oldest and most powerful art forms.`
+      },
+      {
+        title: "IB Visual Arts SL",
+        level: "SL",
+        badge: "sl",
+        preview: "An intense, creative course built around research, artistic creation, and deep reflection—rated 9/10 for enjoyment and 5/5 overall.",
+        body: `IB Visual Art SL is an intense, creative, and deeply personal course that challenges students to grow as both artists and thinkers. Rather than a traditional class with tests and lectures, the course is built around research, artistic creation, and deep reflection. Students explore art from different cultures and time periods, compare the work of different artists, and use that research to inspire and inform their own original body of work. All assessments are project-based with no tests or quizzes, making the course feel very different from a typical academic class. SL students are required to produce a minimum of four pieces for their final exhibition, along with a comparative study examining how different artists' works relate to one another.
+
+Students rate the course difficulty between 6 and 7 out of 10, reflecting the depth of thinking and self-management required to succeed. The course rewards students who are good at staying on top of deadlines and managing their time independently, as there is a significant amount of work that happens outside of class. Despite the challenge, students give the course an enjoyment rating of 9 out of 10 and a perfect 5 out of 5 overall, making it one of the most beloved courses in the program. While a background in studio art, drawing, painting, or ceramics is recommended, students with a strong interest in the arts and a willingness to learn can still thrive.
+
+This course is best suited for students who are curious, reflective, and passionate about creative expression. A great way to prepare is to visit museums, explore different artists, and start forming opinions about what attracts you to certain works. Overall, IB Visual Art SL is a deeply rewarding course that gives students a creative voice, strong critical thinking skills, and a meaningful outlet for self-expression.`
+      },
+      {
+        title: "IB Visual Arts HL",
+        level: "HL",
+        badge: "hl",
+        preview: "An intense, investigative course requiring 8 exhibition pieces and extensive portfolio work—rated 9/10 enjoyment and 5/5 overall.",
+        body: `IB Visual Art HL is an intense, investigative, and deeply personal course that pushes students to engage with art at the highest academic and creative level. The course combines rigorous research with hands-on artistic creation, asking students to study art from a wide range of cultures and time periods, analyze the work and intentions of other artists, and develop an original body of work influenced by that research. All assessments are project-based with no tests or quizzes, but the workload is substantial; students spend an average of two to three hours working on their art outside of class each week. HL students must produce a minimum of eight pieces for their final exhibition, complete a more extensive process portfolio with additional slides documenting their artistic journey, and complete a comparative study that connects three artists from different time periods to their own work as well. The depth of inquiry, writing quality, and artistic output expected at HL are significantly greater than at SL.
+
+Students rate the course difficulty an 8 out of 10, reflecting the high level of self-management, critical thinking, and creative dedication required to succeed. Despite the challenge, students give the course an enjoyment rating of 9 out of 10 and a perfect 5 out of 5 overall, making it one of the highest-rated and most fulfilling courses in the entire program. The course is best for students who are strong in self-regulation and staying on top of deadlines, as the work is ongoing and requires consistent effort throughout both years. A background in studio art, drawing, painting, or ceramics is recommended, though highly motivated students with a deep interest in the arts can succeed even without a traditional art background.
+
+This course is best suited for students who want to grow as artists and as individuals, think deeply about the world around them, and develop a creative voice that is entirely their own. Overall, IB Visual Art HL is an exceptional course for students who are ready to commit fully to the artistic process and produce work they are genuinely proud of.`
+      },
+      {
+        title: "IB Dance SL",
+        level: "SL",
+        badge: "sl",
+        preview: "A choreographic journey—students choreograph, analyze, research, write, and reflect. Rated 10/10 for enjoyment and 5/5 overall.",
+        body: `IB Dance SL is a creative and fulfilling course that transforms students into well-rounded, intentional artists. Rather than simply performing choreography, the course challenges students to choreograph, analyze, research, write, and reflect all within the world of dance. It is best described as a choreographic journey, taking the technical and analytical skills built in earlier years and applying them in a portfolio-based, project-driven environment. The course is especially well-suited for students who love dance and are open to making themselves vulnerable, sharing their work, receiving feedback, and continuously refining their craft.
+
+Students rate the course difficulty a 4 out of 10, making it one of the more approachable IB electives, and give it a perfect 5 out of 5 for overall quality and a 10 out of 10 for enjoyment, a clear sign that students who enter with a passion for dance find the experience deeply rewarding. While no formal prerequisites are required, students with prior experience, whether from Dance Studio 1 and 2 or private studios outside of school, tend to find the workload most manageable.
+
+Assessments in IB Dance SL include two choreographic works, each accompanied by a written component, as well as a research project. These assignments ask students to think deeply about process, not just performance. The IB learner profiles that best define this course are risk-taker and communicator, as students must regularly step outside their comfort zones and articulate their artistic choices. This course is ideal for any student who loves dance, is open-minded, and is ready to engage with movement as both an art form and an academic discipline. Students who take it walk away not just as stronger dancers, but as more reflective, communicative, and creative thinkers.`
+      },
+      {
+        title: "IB Dance HL",
+        level: "HL",
+        badge: "hl",
+        preview: "Same spirit as SL but with greater depth—three choreographic works and a comprehensive portfolio. Rated 10/10 for enjoyment and 5/5 overall.",
+        body: `IB Dance HL shares the same spirit and creative energy as its SL counterpart, but asks students to go further into their choreographic process, more extensively in their portfolio, and more committed to the analytical demands of the course. Like SL, it is a journey through choreography, performance, research, and written reflection, but with an additional choreographic work and a greater overall investment of time and effort. The course is best suited for students who not only love dance but are eager to immerse themselves fully in it as both an art and an academic pursuit.
+
+Student experiences with difficulty vary widely, with ratings ranging from a 2 to an 8 out of 10, a reflection of how much prior dance experience shapes the workload. Students with strong backgrounds in dance, particularly those who have trained in private studios or completed Dance Studio 1 and 2, tend to find the course more manageable, while those newer to dance may feel the challenge more acutely. Despite that range, students give the course a perfect 5 out of 5 for overall quality and a 10 out of 10 for enjoyment, showing that the extra depth of HL is consistently seen as worth it.
+
+HL students complete three choreographic works, each with a written component, alongside a research project, all building toward a comprehensive portfolio. Importantly, the distinction between SL and HL is not about technical skill level but about the volume and depth of work. As the teacher puts it, choosing HL is about how in-depth you want to go, not how good a dancer you are. Risk-taking and communication remain the defining IB learner profiles for this course. Students who thrive in IB Dance HL are passionate, open-minded, and ready to commit fully to dance as both a creative and intellectual experience.`
+      }
+    ]
+  },
+  {
+    dept: "Core",
+    deptColor: "#0891b2",
+    courses: [
+      {
+        title: "IB Theory of Knowledge",
+        level: "Core",
+        badge: "core",
+        preview: "A required diploma core course encouraging critical thinking about knowledge itself—uniquely philosophical, discussion-based, and genuinely surprising.",
+        body: `Theory of Knowledge (TOK) is a core component of the IB Diploma Programme that encourages students to think critically about knowledge, how it is created, and how it shapes the world around them. Unlike most classes, TOK does not focus on a single subject area. Instead, students explore a wide variety of topics, including history, human sciences, philosophy, current events, and questions about how we know what we know.
+
+Many students entered the course unsure of what to expect. Some anticipated a rigorous, essay-heavy class, while others thought it would simply be an extension of their other IB courses. Most students found that TOK was much more discussion-based and philosophical than they had originally imagined. Students frequently described the class as unique, thought-provoking, and surprisingly enjoyable.
+
+One of the most commonly praised aspects of TOK is the variety of topics discussed. Students appreciated learning about ideas and perspectives they would not normally encounter in other classes. Many also highlighted the teachers as a major strength of the course, noting that they create an engaging and relaxed classroom environment. While some students found certain concepts abstract or difficult to connect to everyday life, others enjoyed the challenge of questioning assumptions and exploring complex ideas.
+
+The primary assessments in TOK include the TOK Exhibition and the TOK Essay, both of which contribute to the IB Diploma. Students emphasized the importance of staying organized and not postponing these long-term assignments. Overall, students recommend approaching the class with an open mind and a willingness to participate. While TOK is required for IB Diploma candidates, many students found it to be an enjoyable break from their other classes and a valuable opportunity to better understand the world around them.`
+      }
+    ]
+  }
+];
+
+const DEPT_ICONS = {
+  "Humanities": "🌍",
+  "Science": "🔬",
+  "Language": "📚",
+  "Mathematics": "📐",
+  "Arts": "🎨",
+  "Core": "🧠"
+};
+
+let activeFilter = "all";
+let searchQuery = "";
+
+function getBadgeClass(badge) {
+  const map = { hl: "badge-hl", sl: "badge-sl", ab: "badge-ab", core: "badge-core", other: "badge-other" };
+  return map[badge] || "badge-other";
+}
+
+function highlight(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(escaped, 'gi'), m => `<mark>${m}</mark>`);
+}
+
+function renderCourses() {
+  const container = document.getElementById('course-container');
+  const noResults = document.getElementById('no-results');
+  container.innerHTML = '';
+  let totalVisible = 0;
+
+  COURSES.forEach(deptData => {
+    if (activeFilter !== 'all' && deptData.dept !== activeFilter) return;
+
+    const filtered = deptData.courses.filter(c => {
+      if (!searchQuery) return true;
+      const q = searchQuery.toLowerCase();
+      return c.title.toLowerCase().includes(q) || c.body.toLowerCase().includes(q) || c.preview.toLowerCase().includes(q);
+    });
+
+    if (filtered.length === 0) return;
+    totalVisible += filtered.length;
+
+    const section = document.createElement('div');
+    section.className = 'dept-section';
+    section.dataset.dept = deptData.dept;
+
+    section.innerHTML = `
+      <div class="dept-header">
+        <div class="dept-icon" style="background:${deptData.deptColor}22; color:${deptData.deptColor}">${DEPT_ICONS[deptData.dept]}</div>
+        <h2 class="dept-title">${deptData.dept}</h2>
+        <span class="dept-count">${filtered.length} course${filtered.length !== 1 ? 's' : ''}</span>
+      </div>
+      <div class="cards-grid"></div>
+    `;
+
+    const grid = section.querySelector('.cards-grid');
+
+    filtered.forEach(course => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.setProperty('--dept-color', deptData.deptColor);
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `Open ${course.title}`);
+
+      const titleHl = highlight(course.title, searchQuery);
+      const previewHl = highlight(course.preview, searchQuery);
+
+      card.innerHTML = `
+        <div class="card-top">
+          <h3 class="card-title">${titleHl}</h3>
+          <span class="level-badge ${getBadgeClass(course.badge)}">${course.level}</span>
+        </div>
+        <p class="card-preview">${previewHl}</p>
+        <div class="card-footer">
+          <span class="card-dept-tag">${deptData.dept}</span>
+          <span class="read-more-link">Read more →</span>
+        </div>
+      `;
+
+      card.addEventListener('click', () => openModal(course, deptData));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(course, deptData); });
+      grid.appendChild(card);
+    });
+
+    container.appendChild(section);
+  });
+
+  noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+}
+
+function openModal(course, deptData) {
+  document.getElementById('modal-dept').textContent = deptData.dept.toUpperCase();
+  document.getElementById('modal-title').textContent = course.title;
+
+  const badges = document.getElementById('modal-badges');
+  badges.innerHTML = `<span class="level-badge ${getBadgeClass(course.badge)}">${course.level}</span>`;
+
+  const content = document.getElementById('modal-content');
+  const paragraphs = course.body.split('\n\n').filter(p => p.trim());
+  content.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+
+  const overlay = document.getElementById('overlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-close').focus();
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderCourses();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  if (searchQuery) {
+    activeFilter = 'all';
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-filter="all"]').classList.add('active');
+  }
+  renderCourses();
+});
+
+renderCourses();
+</script>
+
+<!-- ── CHATBOT STYLES ── -->
+<style>
+  /* Floating button */
+  #chat-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.32); }
+  #chat-fab svg { width: 26px; height: 26px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  #chat-fab .fab-close { display: none; }
+  #chat-fab.open .fab-chat { display: none; }
+  #chat-fab.open .fab-close { display: block; }
+
+  /* Notification dot */
+  #chat-fab .notif {
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 10px; height: 10px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
+
+  /* Chat window */
+  #chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    width: 380px;
+    max-width: calc(100vw - 40px);
+    height: 520px;
+    max-height: calc(100vh - 140px);
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    z-index: 299;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px) scale(0.97);
+    transform-origin: bottom right;
+    transition: opacity 0.22s, transform 0.22s;
+  }
+  #chat-window.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Chat header */
+  .chat-header {
+    background: var(--ink);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .chat-avatar {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .chat-header-text { flex: 1; }
+  .chat-header-name { font-weight: 600; font-size: 14px; }
+  .chat-header-sub { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+
+  /* Messages area */
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 2px; }
+
+  .chat-msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    gap: 4px;
+    animation: msgIn 0.18s ease;
+  }
+  @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .chat-msg.user { align-self: flex-end; align-items: flex-end; }
+  .chat-msg.bot  { align-self: flex-start; align-items: flex-start; }
+
+  .chat-bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .chat-msg.user .chat-bubble {
+    background: var(--ink);
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-msg.bot .chat-bubble {
+    background: #f1f5f9;
+    color: var(--ink);
+    border-bottom-left-radius: 4px;
+  }
+
+  /* Typing indicator */
+  .typing-bubble {
+    background: #f1f5f9;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    padding: 12px 16px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    align-self: flex-start;
+  }
+  .typing-bubble span {
+    width: 7px; height: 7px;
+    background: #94a3b8;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+  .typing-bubble span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-bubble span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }
+
+  /* Suggested prompts */
+  .chat-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 16px 12px;
+    flex-shrink: 0;
+  }
+  .suggestion-btn {
+    padding: 6px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: white;
+    color: var(--ink);
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .suggestion-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* Input bar */
+  .chat-input-row {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #f1f5f9;
+    flex-shrink: 0;
+  }
+  #chat-input {
+    flex: 1;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 13.5px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    resize: none;
+    line-height: 1.4;
+    max-height: 90px;
+    transition: border-color 0.15s;
+  }
+  #chat-input:focus { border-color: var(--accent); }
+  #chat-send {
+    width: 38px; height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: var(--ink);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+    align-self: flex-end;
+  }
+  #chat-send:hover { background: var(--accent); }
+  #chat-send:disabled { background: #e2e8f0; cursor: not-allowed; }
+  #chat-send svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+
+<!-- ── CHATBOT HTML ── -->
+<button id="chat-fab" aria-label="Open course assistant">
+  <div class="notif"></div>
+  <svg class="fab-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <svg class="fab-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+</button>
+
+<div id="chat-window" role="dialog" aria-label="Course assistant">
+  <div class="chat-header">
+    <div class="chat-avatar">🎓</div>
+    <div class="chat-header-text">
+      <div class="chat-header-name">Harrison IB Guide</div>
+      <div class="chat-header-sub">Ask me anything about courses</div>
+    </div>
+  </div>
+
+  <div id="chat-messages">
+    <!-- Welcome message injected by JS -->
+  </div>
+
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="suggestion-btn">What's the easiest HL?</button>
+    <button class="suggestion-btn">Compare Physics SL vs HL</button>
+    <button class="suggestion-btn">Best course for a STEM student?</button>
+    <button class="suggestion-btn">What does HL vs SL mean?</button>
+  </div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" placeholder="Ask about any course…" rows="1"></textarea>
+    <button id="chat-send" aria-label="Send">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ── CHATBOT SCRIPT ── -->
+<script>
+(function() {
+  const fab = document.getElementById('chat-fab');
+  const win = document.getElementById('chat-window');
+  const messagesEl = document.getElementById('chat-messages');
+  const inputEl = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+  const suggestionsEl = document.getElementById('chat-suggestions');
+
+  let isOpen = false;
+  let isLoading = false;
+  let conversationHistory = [];
+
+  // Build course context from the COURSES data already on the page
+  function buildCourseContext() {
+    return COURSES.map(dept =>
+      dept.courses.map(c =>
+        `--- ${c.title} (${c.level}, ${dept.dept}) ---\n${c.body}`
+      ).join('\n\n')
+    ).join('\n\n');
+  }
+
+  const SYSTEM_PROMPT = `You are a friendly, knowledgeable course advisor for Harrison High School's IB Diploma Programme. Your job is to help students choose the right IB courses.
+
+You have detailed knowledge of every IB course offered at Harrison, shown below. Use ONLY this information to answer questions — do not make up information not found here.
+
+Be conversational, warm, and concise. Use plain language appropriate for high school students. When comparing courses, be specific and honest. When recommending courses, ask about the student's interests if you need more info.
+
+Key facts to always remember:
+- HL = Higher Level (more content, harder exams, more depth)
+- SL = Standard Level (less content, more manageable)
+- Ab Initio = beginner level, no prior experience needed
+- TOK (Theory of Knowledge) is required for all IB Diploma candidates
+- IB exams happen at the end of 12th grade
+- The Internal Assessment (IA) is a research/project component in most courses
+
+COURSE INFORMATION:
+${buildCourseContext()}`;
+
+  // Toggle chat window
+  fab.addEventListener('click', () => {
+    isOpen = !isOpen;
+    fab.classList.toggle('open', isOpen);
+    win.classList.toggle('open', isOpen);
+    fab.querySelector('.notif').style.display = 'none';
+    if (isOpen) {
+      inputEl.focus();
+      if (messagesEl.children.length === 0) addWelcome();
+    }
+  });
+
+  function addWelcome() {
+    addBotMessage("Hi! 👋 I'm your Harrison IB course advisor. I know every course in this guide inside and out.\n\nAsk me anything — which courses are easiest, hardest, best for your interests, or how HL compares to SL. What are you curious about?");
+  }
+
+  function addBotMessage(text) {
+    const msg = document.createElement('div');
+    msg.className = 'chat-msg bot';
+    msg.innerHTML = `<div class="chat-bubble">${formatText(text)}</div>`;
+    messagesEl.appendChild(msg);
+    scrollToBottom();
+  }
+
+  function addUserMessage(text) {
+    suggestionsEl.style.display = 'none';
+    const msg = document.createElement('div');
+    msg.className = 'chat-msg user';
+    msg.innerHTML = `<div class="chat-bubble">${escapeHtml(text)}</div>`;
+    messagesEl.appendChild(msg);
+    scrollToBottom();
+  }
+
+  function showTyping() {
+    const el = document.createElement('div');
+    el.className = 'typing-bubble';
+    el.id = 'typing-indicator';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    messagesEl.appendChild(el);
+    scrollToBottom();
+    return el;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function escapeHtml(t) {
+    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function formatText(text) {
+    // Convert **bold**, line breaks, and basic markdown-ish formatting
+    return escapeHtml(text)
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>');
+  }
+
+  async function sendMessage(userText) {
+    if (!userText.trim() || isLoading) return;
+    isLoading = true;
+    sendBtn.disabled = true;
+
+    addUserMessage(userText);
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+
+    conversationHistory.push({ role: 'user', content: userText });
+
+    const typing = showTyping();
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: conversationHistory
+        })
+      });
+
+      const data = await response.json();
+      removeTyping();
+
+      if (data.content && data.content[0] && data.content[0].text) {
+        const reply = data.content[0].text;
+        conversationHistory.push({ role: 'assistant', content: reply });
+        addBotMessage(reply);
+      } else {
+        addBotMessage("Sorry, I had trouble responding. Please try again!");
+      }
+    } catch (err) {
+      removeTyping();
+      addBotMessage("I'm having connection trouble. Make sure you're connected to the internet and try again.");
+    }
+
+    isLoading = false;
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
+
+  // Send on button click
+  sendBtn.addEventListener('click', () => sendMessage(inputEl.value.trim()));
+
+  // Send on Enter (Shift+Enter for newline)
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(inputEl.value.trim());
+    }
+  });
+
+  // Auto-resize textarea
+  inputEl.addEventListener('input', () => {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 90) + 'px';
+  });
+
+  // Suggestion buttons
+  suggestionsEl.querySelectorAll('.suggestion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!isOpen) {
+        isOpen = true;
+        fab.classList.add('open');
+        win.classList.add('open');
+        if (messagesEl.children.length === 0) addWelcome();
+      }
+      sendMessage(btn.textContent);
+    });
+  });
+})();
+</script>
+</body>
+</html>
